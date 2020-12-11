@@ -7,10 +7,8 @@ A postgresql-client docker image for k8s deployment.
 ### Connect to a PostgreSQL database
 
 ``` bash
-docker run --rm -it --name postgresql-client andreswebs/postgresql-client -u <user> -p<password> -h <host_ip_address> -P <port> -D <database>
+docker run --rm -it --name postgresql-client andreswebs/postgresql-client -h <host_ip_address> -p <port> -U <user> -W
 ```
-
-(Notice that there is no space between `-p` and the password string.)
 
 To get a shell inside the running container:
 
