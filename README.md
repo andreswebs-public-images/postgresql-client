@@ -4,7 +4,7 @@ A postgresql-client docker image for k8s deployment.
 
 ## Running locally
 
-### Connect to a MySQL database
+### Connect to a PostgreSQL database
 
 ``` bash
 docker run --rm -it --name postgresql-client andreswebs/postgresql-client -u <user> -p<password> -h <host_ip_address> -P <port> -D <database>
@@ -36,7 +36,7 @@ kubectl apply -f postgresql-client.yml
 kubectl attach --namespace=postgresql-client -ti postgresql-client
 ```
 
-### Connect to a MySQL database:
+### Connect to a PostgreSQL database:
 
 ``` bash
 psql -h <host_ip_address> -p <port> -U <user> -W
