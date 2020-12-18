@@ -1,13 +1,18 @@
 FROM alpine:3.12
 
-RUN addgroup -g 65333 postgresql-client && \
+RUN apk add --no-cache postgresql-client
+
+ARG PUID=1000
+ARG PGID=1000
+
+RUN \
+  addgroup -g "${PGID}" postgresql-client && \
   adduser \
-    -u 65333 \
+    -u "${PUID}" \
     -G postgresql-client \
     -h /postgresql-client \
     -D \
-    postgresql-client && \
-  apk add --no-cache postgresql-client
+    postgresql-client
 
 WORKDIR /postgresql-client
 

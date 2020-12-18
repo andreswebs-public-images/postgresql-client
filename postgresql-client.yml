@@ -42,10 +42,16 @@ metadata:
     app: postgresql-client
 spec:
   serviceAccountName: postgresql-client
+  securityContext:
+    runAsNonRoot: true
+    supplementalGroups: [ 10001] 
+    fsGroup: 10001    
   containers:
     - name: postgresql-client
       image: andreswebs/postgresql-client
       imagePullPolicy: Always
+      securityContext:
+        runAsUser: 1000      
       stdin: true
       tty: true
       command: ["/bin/sh"]
