@@ -40,6 +40,8 @@ metadata:
   namespace: postgresql-client
   labels:
     app: postgresql-client
+  annotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"    
 spec:
   serviceAccountName: postgresql-client
   securityContext:
