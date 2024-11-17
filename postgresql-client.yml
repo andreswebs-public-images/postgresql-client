@@ -17,6 +17,7 @@ kind: Role
 metadata:
   name: postgresql-client
   namespace: postgresql-client
+rules: []
 
 ---
 kind: RoleBinding
@@ -41,19 +42,26 @@ metadata:
   labels:
     app: postgresql-client
   annotations:
-    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"    
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
 spec:
   serviceAccountName: postgresql-client
   securityContext:
     runAsNonRoot: true
-    supplementalGroups: [ 10001] 
-    fsGroup: 10001    
+    supplementalGroups: [10001]
+    fsGroup: 10001
   containers:
     - name: postgresql-client
       image: andreswebs/postgresql-client
       imagePullPolicy: Always
       securityContext:
-        runAsUser: 1000      
+        runAsUser: 1000
       stdin: true
       tty: true
       command: ["/bin/sh"]
+      resources:
+        requests:
+          memory: 64Mi
+          cpu: 250m
+        limits:
+          memory: 256Mi
+          cpu: 500m
